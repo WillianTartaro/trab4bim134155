@@ -6,6 +6,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -18,6 +20,11 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="tb_pessoa")//tabela de pessoa no Banco de Dados.
+@NamedQueries({ //Query usada para fazer a busca de todas as pessoas cadastradas no Banco de Dados.
+	 
+	@NamedQuery(name = "PessoaEntity.findAll",query= "SELECT p FROM PessoaEntity p")
+ 
+})
 public class PessoaEntity {
  
 	@Id

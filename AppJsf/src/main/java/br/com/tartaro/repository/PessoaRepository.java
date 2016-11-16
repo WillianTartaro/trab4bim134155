@@ -1,11 +1,16 @@
 package br.com.tartaro.repository;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
- 
+import javax.persistence.Query;
+
 import br.com.tartaro.model.PessoaModel;
+import br.com.tartaro.model.UsuarioModel;
 import br.com.tartaro.repository.entity.PessoaEntity;
 import br.com.tartaro.repository.entity.UsuarioEntity;
 import br.com.tartaro.uteis.Uteis;
@@ -43,6 +48,62 @@ public class PessoaRepository {
  
 		
 		entityManager.persist(pessoaEntity);
+ 
+	}
+	
+	/*
+	 * Lista com todos os cadastros de pessoas no Banco de Dados.
+	 */
+	public List<PessoaModel> GetPessoas(){
+ 
+		//Cria Lista.
+		List<PessoaModel> pessoasModel = new ArrayList<PessoaModel>();
+ 
+		//Cria a variavel.
+		entityManager =  Uteis.JpaEntityManager();
+ 
+		//Query usada para fazer a consulta no banco.
+		Query query = entityManager.createNamedQuery("PessoaEntity.findAll");
+ 
+		@SuppressWarnings("unchecked")
+		Collection<PessoaEntity> pessoasEntity = (Collection<PessoaEntity>)query.getResultList();
+ 
+		PessoaModel pessoaModel = null;
+ 
+		//Percorre a lista.
+		for (PessoaEntity pessoaEntity : pessoasEntity) {
+ 
+			pessoaModel = new PessoaModel();
+			pessoaModel.setCodigo(pessoaEntity.getCodigo());
+			pessoaModel.setDataCadastro(pessoaEntity.getDataCadastro());
+			pessoaModel.setEmail(pessoaEntity.getEmail());
+			pessoaModel.setEndereco(pessoaEntity.getEndereco());
+			pessoaModel.setNome(pessoaEntity.getNome());
+ 
+			//Altera o tipo de origem.
+			if(pessoaEntity.getOrigemCadastro().equals("X"))
+				pessoaModel.setOrigemCadastro("XML");
+			else
+				pessoaModel.setOrigemCadastro("INPUT");
+ 
+			
+			if(pessoaEntity.getSexo().equals("M"))
+				pessoaModel.setSexo("Masculino");
+			else
+				pessoaModel.setSexo("Feminino");
+ 
+			UsuarioEntity usuarioEntity =  pessoaEntity.getUsuarioEntity();			
+ 
+			UsuarioModel usuarioModel = new UsuarioModel();
+			usuarioModel.setUsuario(usuarioEntity.getUsuario());
+ 
+			pessoaModel.setUsuarioModel(usuarioModel);
+ 
+			//Adiciona pessoaModel a lista.
+			pessoasModel.add(pessoaModel);
+		}
+ 
+		return pessoasModel;
  
 	}
 }
