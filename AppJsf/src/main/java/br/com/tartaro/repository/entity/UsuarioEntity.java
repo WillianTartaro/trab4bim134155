@@ -27,7 +27,7 @@ public class UsuarioEntity implements Serializable{
 	@Id
 	@GeneratedValue
 	@Column(name="id_usuario")	//nome referente ao nome da coluna da tabela tb_usuario.
-	private String codigo;
+	private int codigo;
  
 	@Column(name="ds_login")	//nome referente ao nome da coluna da tabela tb_usuario.
 	private String usuario;
@@ -36,10 +36,10 @@ public class UsuarioEntity implements Serializable{
 	private String senha;
  
 	/* Metodo resposavel por capturar o codigo que ira vir da coluna id_usuario.  */
-	public String getCodigo() {	
+	public int getCodigo() {	
 		return codigo;
 	}
-	public void setCodigo(String codigo) {
+	public void setCodigo(int codigo) {
 		this.codigo = codigo;
 	}
 	/* Metodo resposavel por capturar o codigo que ira vir da coluna id_usuario.  */

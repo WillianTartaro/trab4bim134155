@@ -13,16 +13,16 @@ public class UsuarioModel implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	 
-	private String codigo;
+	private int codigo;
 	private String usuario;
 	private String senha;
  
 	
 	/* Metodo resposavel por capturar o codigo que ira vir da pagina  */
-	public String getCodigo() {
+	public int getCodigo() {
 		return codigo;
 	}
-	public void setCodigo(String codigo) {
+	public void setCodigo(int codigo) {
 		this.codigo = codigo;
 	}
 	
