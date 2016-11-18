@@ -21,7 +21,7 @@ import br.com.tartaro.repository.PessoaRepository;
 @RequestScoped//Cada solicitação, gera um novo contexto.
 public class GraficoPizzaPessoaController {
  
-	@Inject//pessoaModel ira receber a injeção de dependencias.
+	@Inject//pessoaRepository ira receber a injeção de dependencias.
 	private PessoaRepository pessoaRepository;
  
  
