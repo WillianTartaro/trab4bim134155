@@ -22,7 +22,9 @@ import javax.persistence.Table;
 @Table(name="tb_pessoa")//tabela de pessoa no Banco de Dados.
 @NamedQueries({ //Query usada para fazer a busca de todas as pessoas cadastradas no Banco de Dados.
 	 
-	@NamedQuery(name = "PessoaEntity.findAll",query= "SELECT p FROM PessoaEntity p")
+	@NamedQuery(name = "PessoaEntity.findAll",query= "SELECT p FROM PessoaEntity p"),
+	@NamedQuery(name="PessoaEntity.GroupByOrigemCadastro",query= "SELECT p.origemCadastro, count(p) as total FROM PessoaEntity p GROUP By p.origemCadastro")
+
  
 })
 public class PessoaEntity {
